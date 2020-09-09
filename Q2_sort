@@ -1,0 +1,24 @@
+#!/bin/bash
+echo "How many integers do you have?"
+read -r counter
+touch myarray.txt > myarray.txt
+for ((k=1;k<=counter;k++))
+do
+  echo "Input No.$k integer"
+  read -r "Number"
+  echo "$Number" >> myarray.txt
+done
+sort -n myarray.txt > a_array.txt
+sort -n -r myarray.txt > d_array.txt
+if [ "$(diff -q myarray.txt d_array.txt)" == "" ]
+  then
+  echo "Your sequence is sorted in descending order."
+  exit 0
+elif [ "$(diff -q myarray.txt a_array.txt)" == "" ]
+  then
+  echo "Your sequence is sorted in ascending order."
+  exit 0
+else
+  echo "Your sequence is unordered."
+  exit 0
+fi
