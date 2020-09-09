@@ -1,0 +1,22 @@
+#!/bin/bash
+# Get your first name, last name, weight, and height
+echo "Enter your First and Last Name"
+read -r STR
+first_name=$(echo "$STR" | cut -f1 -d ' ')
+last_name=$(echo "$STR" | cut -f2 -d ' ')
+echo "What is your weight in pounds? "
+read -r weight_lbs
+echo "What is your height in inches? "
+read -r height_inches
+# calculate your weight(kg), height(cm), and bmi
+weight_kg=$(echo "scale=2; $weight_lbs*0.453592" | bc)
+height_cm=$(echo "scale=2; $height_inches*2.54" | bc)
+height_m=$(echo "scale=2; $height_inches*0.0254" | bc)
+height_mm=$(echo "scale=2; $height_m*$height_m" | bc)
+bmi=$(echo "scale=2; $weight_kg / $height_mm" | bc)
+echo "Your first name is $first_name"
+echo "Your last name is $last_name"
+echo "Your weight is $weight_kg kgs"
+echo "Your height is $height_cm cms"
+echo "Your BMI is $bmi kg/m**2"
+exit 0
